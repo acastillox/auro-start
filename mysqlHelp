@@ -1,0 +1,31 @@
+Entity - table
+Default values (good practice)
+Aggregate expressions (or functions) group data
+
+1. from, joins (total working set)
+2. where (constraints)
+	Aliases in the SELECT part of the query are not accessible in most databases since they may include 
+	expressions dependent on parts of the query that have not yet executed
+3. group by
+4. having
+5. SELECT (query is finally computed)
+6. DISTINCT
+7. order by
+8. limit, offset
+
+CREATE TABLE 
+			 TEMPORARY
+			 
+			 [TEMPORARY] -> "visible only within the current session"
+			 
+			 COPY/CLONIG
+			 
+			 new [LIKE] original -> "create empty table based on the definition of other"
+			 [AS] <query_expression> -> CREATE TABLE new_tbl AS SELECT * FROM orig_tbl;
+			 [IGNORE|REPLACE] -> how to handle rows that duplicate unique keys values
+								 when copying a table using a "SELECT"
+								 
+			 DATA TYPES
+			 (DAFAULT DOES NOT APPLY to: BLOB, TEXT, GEOMETRY, JSON)
+			 (AUTO-INCREMENT ONLY APPLY to: integer and floating types)
+			 (CHARSET and COLLATE )
