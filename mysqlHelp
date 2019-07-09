@@ -29,3 +29,16 @@ CREATE TABLE
 			 (DAFAULT DOES NOT APPLY to: BLOB, TEXT, GEOMETRY, JSON)
 			 (AUTO-INCREMENT ONLY APPLY to: integer and floating types)
 			 (CHARSET and COLLATE )
+
+_ underscore (LIKE, NOT LIKE)
+Apache Lucene or Sphinx???
+
+
+columns being the properties and the rows being instances of the entity in the table
+database schema is what describes the structure of each table
+mathematical and string expressions
+
+sqlite (does not support drop columns)
+
+(DROP TABLE) Will have to either update all dependent tables first to remove the dependent rows or 
+to remove those tables entirely
