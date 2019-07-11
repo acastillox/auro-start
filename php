@@ -131,7 +131,7 @@ files
 	fopen() (creates or opens a file)
 		r: Opens read only.
 		w: Opens write only. Erases contents file or new file if doesn't exist.
-		a: Opens write only.
+		a: Opens write only. (append)
 		x: new file for write only.
 		r+: Opens file for read/write.
 		w+: Opens file for read/write. Erases contents file or new file if it doesn't exist.
@@ -139,10 +139,58 @@ files
 		x+: Creates new file for read/write
 	fwrite(file(resource), string) 
 	fclose() (close file.. TRUE on success or FALSE on failure)
+	file() (reads entire file into an array (element array per line))
 
+OOP
+properties -> variables
+methods -> fuctions
 
-
-
-
+	visibility  ???
+		public (anywhere in the code)
+		protected (only class itself, by inheriting, and by parent classes)
+		private (only class that defines them)
+		
+instantiation
+	$bob = new Person();
+	arrow (->) construct (access properties/methods)
+	$this (pseudo-variable, self-reference)
+	
+constructor
+	__construct(parameters) (magic method).. on instance
+	__destruct() on destroy
+	unset(obj) (destroy the object)
+	
+inheritance (class)
+	parent/subclass (methods and properties)
+	extends (keyword)
+	(Parent constructor not called if subclass defines a constructor. 
+	if child does not define a constructor then it will be inherited from the parent 
+	if it is not declared private)
+	
+interfaces (interface)
+	(not contain any method implementations)
+	implements (keyword)
+	(implement multiple interfaces... separated by comma)
+	(interface can inherit interface by extends)
+	mthods public
+	
+abstracts (abstract)
+	inherited but not instantiated
+	both methods (defined and abstract (not defined))
+	inheriting (implement all the abstract methods)
+	abstract (method) extends
+	
+static
+	static (keyword)
+	property/method (without creating an object)
+	scope resolution operator /::/
+	self (within class)
+	(Objects of a class cannot access static properties in the class but they 
+	can access static methods) ???
+	
+final
+	methods cannot be overridden in child classes
+	classes cannot be inherited
+	properties cannot be marked final
 
 config.php
