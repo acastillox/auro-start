@@ -1,0 +1,700 @@
+RUNS ON THE .NET Framework
+	- CLR (Common Language Runtime) - manages code at exucution time,
+		providing core services such MEMORY MANAGEMENT, CODE ACCURACY.. ETC
+	- .NET Framework CLASS LIBRARY - collection of classes, interfaces,
+		and value types (data collection, file access, work with text)
+
+PROJECTS
+	Console Application (text-only application) -- command-line interfaces (CLI)
+	
+VARIRABLE
+	reserves a memory location, or space in memory
+	to use:
+		specify a NAME and DATA TYPE (declare)
+			name (identifier): can contain letters, numbers and underscore
+				must start with letter or underscore
+	
+	TYPES
+		define the information that can be stored, the size and the operations.
+		can assing value when declare it or latter on the code
+		
+		int
+		float - floating point number 32 bit (7 digits)
+		double - double-presition version of float 64 bit (15-16 digits)
+		char - ''
+		bool
+		string - "" .... + concatenate
+		
+		Primitive type	Aliased Type
+		sbyte			System.SByte
+		byte			System.Byte
+		short			System.Int16
+		ushort			System.UInt16
+		int				System.Int32
+		uint			System.UInt32
+		long			System.Int64
+		ulong			System.UInt64
+		char			System.Char
+		float			System.Single
+		double			System.Double
+		bool			System.Boolean
+		decimal			System.Decimal
+
+STATEMENT
+	ends with a semicolon /;/
+	
+EVERY C# CONSOLE APPLICATION must contain a method named MAIN (is the starting point of every
+application, the point where starts execution from) + Libraries and services do not require a Main
+
+ctrl + f5 -> RUN the program
+
+DISPLAYING OUTPUT
+	Console.Write() -> to add next line Environment.NewLine
+	Console.WriteLine() -> moves the cursor to the next line after the text output
+		WriteLine is a METHOD
+		
+	FORMATTED STRING
+		Console.WriteLine("x={0};y={1}", x, y);
+							  ^-----^--- PLACEHOLDERS
+							  
+USER INPUT
+	Console.ReadLine() -> waits for user input, and then returns a string (entire line)
+	Console.Read() -> returns a character at a time until end of the input (returns a integer... ascii representation of the char)
+	Console.ReadKey() -> provides additional information about the key that was pressed and the state of any modifier
+	
+	convert data type
+		Convert.ToDouble
+		Convert.ToBoolean
+		Convert.ToInt16
+		Convert.ToInt32 // DEFAULT int type
+		Convert.ToInt64
+
+COMMENTS
+	// --- single line
+	/**/ --- multiple line
+	
+VAR (keyword)
+	the compiler determine the type of the variable autimatically based on the expression
+	variables declared using VAR are called IMPLICITLY TYPED
+	MUST BE INITALIZED
+	OVERUSE CAN HARM THE READABILITY OF THE CODE
+	type inference???
+	
+CONSTANTS
+	MUST BE INITIALIZED
+	use the modifier:
+		const (keyword)
+
+ARITHMETIC OPERATORS
+	+, -, *, /, %
+		if integers in division, any remainder is dropped (to return a integer value)
+		
+	OPERATORS PRECEDENCE
+		1. multiplicative
+		2. additive
+		equal precedence (left to right)
+		
+ASSIGMENT OPERATORS
+	=
+	
+	COMPOUND ASSIGMENT OPERATORS
+		+=
+		-=
+		/=
+		*=
+		%=
+		
+	INCREMENT
+		++
+		--
+		PREFIX - increments and then proceeds with the expression
+		POSTFIX - evaluates the expression and the performs the increment
+		
+IF STATEMENT
+	if(expression){true}
+	if(expression){true}else{false}
+	if(expression){true}else if(expression){true}else{false}
+
+RELATIONAL OPERATORS
+	<, >, <=, >=, ==, !=
+	
+SWITCH
+	switch(variable){ case val1:...break; case val2:...break; default:...break;}
+		(break -> code keeps running next case statements, 
+			even doesn't match. this is called FALLTHROUGH, modern compilers NOT COMPILE
+			such code)
+
+break (ends -> for, foreach, while, do-while, switch, stop the script)
+
+WHILE
+	while(condition){true; increment;}
+		while(num < 6){num++;} vs while(++num < 6)
+	
+FOR
+	for(init; condition; increment){true}
+		init and increment statements  may be LEFT OUT... SEMICOLONS ARE MANDATORY
+		
+DO-WHILE
+	do{}while(condition);
+	
+BREAK
+	inside a loop, is immediately terminated (nested, stops the innermost loop)
+
+CONTINUE
+	skips the current iteration
+	
+FOREACH
+	foreach(int k in a){} // iterates through the array "a" and assigns the value of the current
+	element to the  variable "k"
+	
+	data type should match... often "var" is used
+	
+LOGICAL OPERATORS
+	&&, ||, !
+	
+CONDITIONAL OPERATOR
+	exp1 ? (true)exp1 : (false)exp1;
+	
+METHOD
+	DECLARATION
+		accessor
+		return type (no return value -> void)
+		method name
+		optional parameters
+	
+	ARGUMENTS(CALL)/PARAMETERS(METHOD)
+		(int x) simple
+		(int x, int y) multiple
+		(int x = 0) optional (at the end of the list)
+	
+	NAMED ARGUMENTS
+		use parameter names to provide the arguments in any order:
+			static int Area(int h, int w){}
+			... int res = Area(w: 5, h:8);
+			
+	PASSING ARGUMENTS
+		value - copies the argument's value into the method
+		reference - copies an argument's memory address into the parameter
+			ref (keyword) used in both (call/definition)
+		output - transfer data out of the method
+			out (keyword) used in both (call/definition)
+				static void GetValues(out int x, out, int y){x=5,y=42}
+				... GetValues(out a, out b); //a == 5, b == 42
+
+OVERLOADING
+	methods have the same name, but different parameters (type, number, NOT return type)
+	
+RECURSION
+	method that calls itself (exit condition (prevents forever))
+	
+CLASSES
+	data type that defines a set of variables and methods for a declared object (instance). its like
+	a blueprint... defines the data and the behavior for a type
+	DEFINITION
+		class (keyword)
+		class name
+		{}
+		
+	on instance... intilize
+		allocate some memory the size of an instance of the Person class, and allocate a reference to that memory location to the person variable
+		
+	BASE CLASS --> System.Object
+	
+	public --- OK
+	private only on nested classes (by default... ok) ... on constructor (allows to have references, but no instances)
+		
+MODIFIERS apply to types and type members
+	types -> class is accessible from any assembly (another program or library)
+	member -> 
+	
+	internal -> code that can only be accessed from your own code
+.........
+		
+ENCAPSULATION
+	- Control the way data is accessed or modified.
+	- Code is more flexible and easy to change with new requirements.
+	- Change one part of code without affecting other parts of code.
+	
+CONSTRUCTORS
+	exactly the same name as its class (not name... type??), 
+	is public, does not have a return type
+	on creation object is created
+	useful (notification email to someone... on constructor), initial values
+	can be overloaded
+	
+	base() - base class access... used to access members of the base class from within a derived class
+	
+PROPERTIES
+	mechanism to read, write, or compute the value of a private field
+	public (can also be private) data members, that include special methods called 
+		accessors (any can by omitted):
+			get
+			set
+			
+			private string name;
+			public string Name // (same name as the private field with a capital letter)
+			{
+				get { return name; }
+				set { name = value; } // value (keyword) represents the value assigned
+			}
+		
+	are accessed by its name
+	why use?? control the logic of accessing the variable
+	
+	AUTO-IMPLEMENTED
+		(short) member only accessed through the Name property's get, set
+			public string Name {get; set;} // no private field name separately (created
+				automatically) --- explicit backing field
+				
+ARRAYS (it is a class)
+	data structure to store a collection of data (same type)
+		int[] myArray; //declares an array of integers
+		int[] myArray = new int[5]; // array are objects, instantiate them
+			5 -> number of elements
+	zero indexed
+	default values
+		string[] names = new string[3] {"John", "Mary", "Jessica"};
+			// number of elements can be omitted
+		string[] names = new string[] {"John", "Mary", "Jessica"};
+			// even new can be omitted
+		string[] names = string[] {"John", "Mary", "Jessica"};
+		
+	MULTIDIMENTIONAL (single block of memory... a matrix, same amount of columns for every rows)
+		int[,] x = new int[3,4];
+		
+		intialize the same way
+			int[,] someNums = {{2,3},{5,6},{4,6}}; // three rows and two columns
+				someNums[0,0]; // access
+		
+	JAGGED ARRAYS (each array occupy their own block of memory)
+		array of arrays
+			int [][] jaggedArray = new int[3][]; // defined
+			int [][] jaggedArray = new int [][]
+			{
+				new int [] {1,8,2,7,9},
+				new int [] {2,4,6},
+				new int [] {33,42},
+			} // intilized
+			
+	PROPERTIES
+		.Length // number of elements
+		.Rank // nmber of dimentions
+		.Max() // largest value
+		.Min() // smallest value
+		.Sum() // sum of all elements
+		
+STRINGS (it is a class)
+	.Length // 
+	.IndexOf(value) // index of the first occurrence of the value
+	.Insert(index, value) // inserts value starting after the specified index
+	.Remove(index) // remove characters after the specified index
+	.Replace(oldValue, newValue) // replace specific value
+	.Substring(index, length) // substring starting the specified index, length specified or to the end
+	.Contains(value) // true if contains specified value
+	
+	can access character by its index
+
+MORE ON CLASSES
+	DESTRUCTORS
+		invoked when object is destroyed or deleted
+		classes can only have ONE
+		cannot be called
+		does not take modifiers?? or have no parameters
+		name is exactly the same as the class prefixed with a tilde (~)
+		
+		useful (closing files, releasing memory...)
+		
+	STATIC
+		members belong to the class itself, instead of belonging to individual objects
+		only one copy of the static member
+		access using the class name, without an object (generates an error)
+			class Cat{public static int count = 0}
+			Cat.count; // access
+			
+		METHODS
+			can access only static members (from Main only call static members)
+		
+		CONSTANTS
+			are static by definintion
+		
+		CONSTRUCTORS
+			can be declared to initialize static methods... are called automatically
+			when access a static member
+		
+		CLASSES
+			only contain static members
+			can not instantiate
+			only one instance can exist in a program
+			useful for combining logical properties and methods (e.g. Math class)
+			
+				Math.PI // constant PI
+				Math.E // natural logarithmic base e
+				Math.Max() // larger of two arguments
+				Math.Min() // smaller of two arguments
+				Math.Abs() // absolute of argument
+				Math.Sin() // sine of angle
+				Math.Cos() // cosine of angle
+				Math.Pow() // number raised to the power
+				Math.Round() // decimal to its nearest integral value
+				Math.Sqrt() // square root of a number
+				
+				Array.Reverse();
+				Array.Sort();
+				
+				String.Concat();
+				String.Equals();
+				
+				DateTime.DaysInMonth(2019, 2);
+				
+		THIS
+			used inside the class and refers to the current instance of the class
+				common use -> pass the current instance to a method as paramete
+				
+		READONLY
+			prevent a member of a class from being modified after construction... only
+			modified when declare of from constructor
+			
+			vs CONST
+				1. const must be initialized when declared
+				2. readonly can be changed in a constructor
+				3. readonly can be assigned a value that is result of a calculation
+				
+		INDEXER
+			allows objects to be indexed
+			STRING CLASS (implements an indexer) IS AN ARRAY OF CHAR OBJECTS
+			can use any type of index
+			similar to property... difference.. indexer accessors require a index
+			return or set a particular value from the object instance
+			
+			class Clients {
+			  private string[] names = new string[10];
+
+			  public string this[int index] {
+				get {
+				  return names[index];
+				}
+				set {
+				  names[index] = value;
+				}
+			  }
+			}
+			
+		OPERATOR OVERLOADING
+			most operators can be overloaded, can be redefined for custom actions
+			define
+				operator (keyword) followed by the symbol for the operator being defined
+			should return and new object with the new values or boolean or etc
+			must be static
+			
+INHERITANCE
+	define class based on another class
+	derived class inherits base class
+	define
+		class Dog : Animal {}  // derived class :  base class
+	inherits all the members
+	can not inheritance from multiple classes
+	
+	PROTECTED
+		accessed in the derived classes
+		
+	SEALED
+		prevent other classes from inheriing it, or any of its memebers
+		
+	constructor and destructor are not inherited.. define constructors (derived class)
+		however the base class constructor and destructor are invoked automatically
+		when an object derived is created or deleted
+		first calls the base constructor then derived.... first derived destructor then base destructor
+		
+POLYMORPHISM
+	many forms... sigle method can have a number of different implementations
+	base class -> virtual (keyword) allows methods to be overridden in derived classes
+		...public virtual void Draw(){}
+	derived classes -> override (keyword)
+		public override void Draw(){}
+		
+	creates objects of the base type, but instantiate them as the derived type
+	...  carries optional semantics instead of required semantics (abstract)
+		no constructors
+		non-static
+		no class
+	
+ABSTRACT
+	methods using abstract specify that the derived classes must define that method
+	abstract (keyword)
+	can not create objects of a class abstract (abstract if contains a abstract method)
+	has no body
+	   ... public abstract void Draw();
+	multiple abstract members
+	acts like a template
+	non abstract class derived form an abstract, must include actual implementations of all
+		inherited abstract methods and accessors
+	requires a class to be inherited opossite meaning to sealed
+	
+INTERFACES
+	interface (keyword)
+	all members are by default abstract and public... no nedd to use the abstract keyword
+	capital /I/ letter as the starting letter for name
+	can contain methods, properties, but cannot contain fields (variables)
+	defines what a class should do
+	can implement multiple interfaces
+	
+NESTED CLASSES
+	instance of a class inside a class or a class definition
+	
+NAMESPACES
+	scope of related objects
+	using (keyword/directive) -> using a given namespace
+	without it -> specify the namespace wherever it is used (with a fully-qualified name)
+	
+STRUCTS
+	value type, encapsulate groups of realted variables
+	share most of the same syntax as classes
+		intance without using a new operator
+		methods, properties, indexers
+		constructor (with parameters)... use new for instance
+		
+		no inheritance
+		no virtual methods
+		no default constructor (constructor without parameters)
+		
+	small data structures that contain data that is not intent to be modified
+	(int, double, bool, char) are structs
+	
+ENUMS
+	enumeration: set of named constants (enumerator list)
+	default, first value 0... next increase by one
+	enum Days {sun, mon, tue, wed, thu, fri, sat};
+	enum Days {sun, mon, tue=4, wed, thu, fri, sat};
+	
+	dot syntax
+		int x = (int) Days.tue; // to assign int or other type in parentheses --> (int)
+		
+EXCEPTIONS
+	problem that occurs during program execution, cause abnormal termination of the program
+	caused by user error, programmer error, or physical resource issues
+	
+	HANDLING
+		try{} catch (Exception e){ e.Message; }
+		
+	MULTIPLE
+		try... multiple catch
+
+	common
+		FileNotFoundException
+		FormatException
+		IndexOutOfRangeException
+		InvalidOperationException
+		OutOfMemoryException
+		
+	finally
+		after catch blocks, wheter an exception is thown or not
+		
+FILES
+	System.IO -> NAMESPACE
+		CLASS File
+			WriteAllText -> creates a file with the specified path and writes the content to it
+				If the file already exists, it is overwritten
+			AppendAllText() - appends text to the end of the file.
+			Create() - creates a file in the specified location.
+			Delete() - deletes the specified file.
+			Exists() - determines whether the specified file exists.
+			Copy() - copies a file to a new location.
+			Move() - moves a specified file to a new location
+			ReadAllText() - read the content of a file
+			
+GENERICS
+	CLASSES
+		most common use: collections -> one type of collecton is called stack
+		declare:
+			class Stack<T>{ T[] innerArray = new T[100]}
+		call:
+			Stack<int> intStack = new Stack<int>();
+			
+		methods called same as any other method
+		
+COLLECTIONS (it is a class)
+	group realted objects (unlike array, it is dynamic) shrink or grow
+	
+	DICTIONARIES?????
+	HASHSETS?????
+	
+	typically methods
+		add
+		remove
+		count
+	statements to iterate
+		for
+		foreach
+		
+	declare
+		List<int> li = new List<int>();
+		
+	GENERICS
+		.Net Framework generic collection classes (using Systems.Collections.Generic;)
+			List<T>
+			Dictonary<TKey, TValue>
+			SortedList<TKey, TValue>
+			Stack<T>
+			Queue<T>
+			Hashset<T>
+		
+	NON-GENERIC COLLETIONS
+		can store objects, since an object type can refer to any data type, run the risk
+		of unexpected outcomes. may also be slower to access and execute
+		
+		.Net Framework(System.Collections)
+			ArrayList
+			SortedList
+			Stack
+			Queue
+			Hashtable
+			BitArray
+			
+	AVOID USING LEGACY COLLECTIONS
+	
+LIST<T>
+	elements inserted and removed dynamically... all elements of the same type (T)
+	
+	List<int> li = new List<int>();
+	
+	properties/methods:
+		Count -> (P) gets the number of elements contained
+		Item[int i] -> gets/sets element in the list index
+						"Item" is the indexer no needed to accesing the elemt
+							just [] and the index value
+		Add(T t) -> adds an element /t/ to the end of the list
+		RemoveAt(int index) -> Removes element at specific position
+		Sort() -> sorts elements
+		Capacity -> (P) gets the number of elements the list can hold before resize
+		Clear() -> remove all elements from the list
+		TrimExcess() -> sets capacity to the actual number of elements
+		AddRange(IEnumerable coll) -> add elements /coll/ with elements of same type of list
+			to the end of the list
+		Insert(int i, T t) -> inserts an element /t/ specific index
+		InsertRange(int i, IEnumerable coll) -> inserts elements of coll at specific index
+		RemoveRange(int i, int count) -> remove specific number of elements
+		Contains(T t) -> true if element present
+		IndexOf(T t) -> retunr index of the first occurrence of the element
+		Reverse() -> reverses order
+		ToArray() -> elements to a new array
+		
+		IEnumerable is the collections interface that supports simple iteration over the collection
+			
+SORTEDLIST<K, V>
+	collection of key/value pairs.. sorted by key (used to access value)
+	key/value of the same type K, V
+	not duplicated keys
+	
+	SortedList<string, int> sl = new SortedList<string, int>();
+	
+	properties:
+		Count
+		Item
+		Keys -> sort and indexed collection with only keys
+		Values -> sort and indexed collection of the values
+	methods
+		Add(K key, V value)
+		Remove(K key)
+		Clear()
+		ContainsKey(K key)
+		ContainsValue(V value)
+		IndexOfKey(K key)
+		IndexOfValue(V value)
+		
+BITARRAY
+	collections of bits. commonly used to represent a simple group of boolean flags
+		e.g. used in image processing to store individual bits of gray scale
+	
+	BitArray ba1 = new BitArray(4);
+	
+	properties
+		Count
+		IsReadOnly
+		
+	methods
+		Get(int i) -> value of the bit at specific position
+		Set(int i, bool value) -> bit at specific position
+		SetAll(bool value) -> all to a specific value
+		And(BitArray ba) -> bitwise AND operation of the bit array obj and /ba/
+		Or() -> bitwise OR
+		Not() -> inverts the bits values
+		Xor(BitArray ba) -> bitwise XOR operation
+		
+STACK
+	last in first out.. can be use to create undo-redo functionalities, parsing expressions
+	(infix to postfix/prefix conversion)
+	
+	Stack<int> s = new Stack<int>();
+	
+	properties
+		Count
+		
+	methods
+		Peek() -> returns the element at the top of the stack, without removes it
+		Pop() -> returns the element at the top of the stack and removes it
+		Push(T t) -> inserts an element
+		Clear()
+		Contains(T t) -> true if conteined
+		ToArray()
+		
+QUEUE
+	first in first out..
+	ENQUEUE - insert
+	DEQUEUE - delete
+	use . printing, call center system answering
+	
+	Queue<int> q = new Queue<int>();
+	
+	properties
+		Count
+		
+	methods
+		Dequeue() -> returns the object at the beginning and removes it
+		Enqueue(T t) -> adds to the end
+		Clear()
+		Contains(T t)
+		Peek()
+		ToArray()
+		
+DICTIONARY<U, V>
+	collection of UNIQUE key/value, key to access value
+	use . database indexing, cache implementations
+	key/value same type K, V
+	
+	Dictionary<string, int> d = new Dictionary<string, int>();
+	
+	properties
+		Count
+		Item
+		Keys
+		Values
+		
+	methods
+		Add(K key, V value)
+		Remove(K key)
+		Clear()
+		ContainsKey(K key)
+		ContainsValue(V value)
+		
+HASHSET<T>
+	set of UNIQUE values
+	no index positions and cannot be ordered
+	allow fast lookup, addition, remove, dynamic sets of items or lookup table???? that
+	allow to find item by its key (phone number of a person by the last name)
+	
+	HashSet<int> hs = new HashSet<int>();
+	
+	properties
+		Count
+		
+	methods
+		Add()
+		IsSubsetOf(IColletion c) -> true if hash set is subset of /c/ collection
+		Remove(T t)
+		Clear()
+		Contains()
+		ToString() -> string from the hash set
+		IsSupersetOf(IColletion c) -> true if hash set is superset of /c/ collection
+		UnionWith(IColletion c) -> set union on the hash and specified collection
+		IntersectWith(IColletion c) -> set intersection??? operation on the hash and specified collection
+		ExceptWith(IColletion c) -> difference???? operation on the hash and specified collection
