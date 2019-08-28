@@ -698,3 +698,141 @@ HASHSET<T>
 		UnionWith(IColletion c) -> set union on the hash and specified collection
 		IntersectWith(IColletion c) -> set intersection??? operation on the hash and specified collection
 		ExceptWith(IColletion c) -> difference???? operation on the hash and specified collection
+
+WAYS TO THREAD
+	APM
+	Thread class
+	ThreadPool -> TASK PARALLEL LIBRARY (TPL) - best
+	BackgroundWorker Component
+	TPL (task parallel library)
+	C# async await
+	
+	using System.Threading; // thread class
+
+		definition:
+			Thread t = new Thread (method);
+			
+		once started IsAlive -> true
+		ends when the delegate passed to the "thread's" constructor finishes executing
+		once ended cannot restart
+		
+		CLR (common languge runtime) assigns each thread its own memory stack
+			(variables are kept separate)
+			(share data if they have: 
+				common reference (same object instance)
+				static fields
+			)
+			
+		THREAD SAFETY
+			an output is indeterminate??
+				it is importan the order of conditional, assign, action on shared data
+				results could be possible (though unlikely)
+				
+				e.g.
+					if (!done) { done = true; Console.Write("Done"); }
+										vs
+					if (!done) { Console.Write("Done"); done = true; }
+					
+				REMEDY
+					"exclusive lock"??? one thread waits, or "block"?? until the lock
+					becomes available (only one thread can enter)
+					
+					lock (locker){ if (!done)... } // locker???
+					
+					this is called THREAD-SAFE
+					
+			<!!> sharead data, primary cause of complexity and obscure errors in
+				multithreading
+				
+			<!> thread blocked doesn't consume CPU resources
+			
+		JOIN
+			wait for another thread to end
+			can include a timeout (milliseconds/timespan) (true if ended, false if
+				timed out)
+				
+				e.g.
+					Thread t = new Thread (Go);
+					t.Start(); // executes "Go"
+					t.Join(); // waits
+					Console.Write("end!"); // executes after go ends
+		
+		SLEEP
+			pauses thread for a specified period
+			
+		<!> waiting Sleep or Join the thread is blocked and so does not consume CPU
+			resources
+			
+		STARTING THREAD??
+		
+		PASSING DATA TO A THREAD
+		...
+		...
+		
+TPL
+	TASK
+		contains a snippet of the code that defines the operation that will execute
+		
+
+EXECUTION TIME
+	using System.Diagnostics; // calculate execution time
+
+		var watch = new System.Diagnostics.Stopwatch();
+		watch.Start();
+		watch.Stop();
+
+		watch.ElapsedMilliseconds
+	
+HTTP REQUEST
+	HttpClient // using System.Net.HTTP;
+	3rd-party libraries // RestSharp, Flurl.Http
+	HttpWebRequest // using System.Net; (no new work)
+	WebClient // using System.Net; (no new work)
+	
+	HttpClient for both + async features on .NET 4.5 environments
+	RestSharp for both on non-.NET 4.5 environments
+    HttpWebRequest for control
+    WebClient for simplicity and brevity
+
+PARALLEL
+	
+
+ASYNCHRONOUS PROGRAMMING
+	increase the amount of request that can be handled at the same time with the same
+	resources
+	improves throughput
+	
+	async/await
+		prevent blocking of the current thread and in many cases allow for parallel execution code
+		
+	await
+		can be placed in front of anything that returns a Task or Task<T> instance
+		use only inside a method that has the async keyword
+		ensures that the current code will not continue util the value being "awaited" is fully
+			available
+		
+	async
+	
+	
+THERMS
+	concurrency
+		executing multiple tasks at the same time but not necessarily simultaneously
+	parallel
+		performing two or more tasks simultaneously
+	thread
+		sequence of execution of code which can be executed independently of one another
+	synchronous
+		tasks are executed one after another. Each task waits for any previous task 
+		to complete and then gets executed.
+	asynchronous -> when one task gets executed, you could switch to a different task without waiting 
+		for the previous to get completed
+		
+	CONCURRENCY AND PARALLELISM
+		way tasks are executed
+	SYNCHRONOUS AND ASYNCHRONOUS
+		programming model
+	SINGLE THREADED AND MULTI-THREADED
+		environment of tasks execution
+		
+	Asynchronous programming model helps us to achieve concurrency
+	Asynchronous programming model in a multi-threaded environment is a way to achieve parallelism.
