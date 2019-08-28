@@ -1,0 +1,62 @@
+SSL (Secure Socket Layer)
+TLS (Transport Layer Security)
+
+HAND SHAKE
+one-way SSL (only the server authenticates to the client)
+  e.g. browser only (client) validates the identity of the website (server)
+two-way SSL (Mutual SSL) (server and client authenticate to each other)
+  e.g. server to server communication
+STEPS
+  1. Client Hello
+     client send information required by the server to start a HTTPS
+     connection (tls version that support, cipher suite that support)
+  2. Server Hello
+     server respond back with the configuration it selected from the client
+	(tsl lower client supported, highest server supported, cipher selected).
+     send server certificate (with certificate chain... will be validate against
+     the certificates in the clien trust store)
+  3. Server Key Exchange Message
+     carry datails for the client to generate the
+     pre-master secret (not send if algorithm not require the info from the server)
+  4. Certificate Request
+	one-way -> authenticity of client not validated (omitted)
+	two-way -> send certificate request from the client with certificate type,
+		   certificate signature algotirthms and certificate authorities (if
+		   if empty client may choose whether to send of not client certificate)
+		   server send hello done message
+  5. Client Certificate
+     client presents its certificate chain to the server
+  6. Client Key Exchange Message
+     message needs to be sent by the client following the Client Certificate message.
+     if client certificate is not being presented (in one-way SSL), this should be sent
+     after the client receives the ServerHelloDone message
+  7. Finished
+     Change cipher spec message?? will be sent by both client/server indicating
+     the rest of the communication will be encrypted
+
+Encryption/Decryption
+Key
+Caesar cipher
+Steganography
+Symmetrical Encryption - involves only one secret key (Blowfish, AES, RC4, DES, RC5, RC6)
+  disadvantage - exchange the key used to encrypt the data before thay can decrypt it
+Asymmetrical Encryption - (public key cryptography) uses two keys to encrypt a plain
+  text. SECRET KEYS are exchanged over the network (anyone (with the secret key) can 
+  decrypt the message) PUBLIC KEY freely availble to anyone.
+  Message encypted usign a public key can only be decrypted using a private key, while,
+  message encrypted using a private key can be decrypted using a public key
+Certificate - package of information that identifies a user and a server (contains
+  public key)
+Certificate Authorities
+
+X.509 sintaxis de los certificados:
+	-Version
+	-Numero de serie: Es un identificador único para todos los certificados de una misma CA.
+	-Algoritmo empleado para la firma digital.
+	-Nombre del certificador.
+	-Periodo de validez.
+	-Nombre dueño certificado
+	-Clave publica.
+	-Extensiones: Información adicional permitida por el estandar.
+	-Firma digital de todo lo anterior generada por el certificador.
+	-Firma digital de la CA.
