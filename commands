@@ -1,0 +1,40 @@
+git init
+git checkout -b <branchname> (branch + checkout)
+git brach -> list, create, delete <branchname> [-r] -> remote [-u] -> setup tracking info
+git checkout <brachname> [--track <remote/branch>]
+git log [--graph] [--oneline] [--stat] [--pretty=oneline] [-p] -> changes
+git config --global user.mail "you@example.com"
+git add <path>
+	add [--interactive] -> shows a menu (status, patch, update, add untracket, diff, revert)
+	add [--patch] (modify )
+		y - stage this hunk
+		n - do not stage this hunk
+		q - quit; do not stage this hunk or any of the remaining ones
+		a - stage this hunk and all later hunks in the file
+		d - do not stage this hunk or any of the later hunks in the file
+		g - select a hunk to go to (list all from current file)
+		/ - search for a hunk matching the given regex
+		j - leave this hunk undecided, see next undecided hunk
+		J - leave this hunk undecided, see next hunk
+		e - manually edit the current hunk
+		? - print help
+git rm -> remove files from the working tree and index
+git status
+git diff -> cambios actuales [--cached] --> nuevos archivos [--name-only] [--staged]
+git diff <commit>
+	git diff <commit> <commit>
+git reset HEAD <file> -> unstagegit 
+git checkout -- <file> -> discard changes in working directory
+git ls-files -> show contents of INDEX
+git stash -> (secret store) [--include-untracked]
+	stash pop -> (remove and aply a stash (last of the stack))
+	stash push -> (save new stash entry)
+git remote -> list added remotes [add] <shortname> <http> [remote] [-v] -> verbose [remove]
+git clone [https|ssh|ftp] (creates references to the remote branch)
+git rebase [--continue] [--skip] [--abort]
+git push [--force] [--force-with-lease] [-u] -> upstream <branchname>
+git reflog -> (git )
+
+git am --show-current-patch ????
+git add/rm <conflicted_files> ????
+gitCredentials ????
