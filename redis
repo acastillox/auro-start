@@ -1,0 +1,122 @@
+supports data structures such: 
+strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, 
+geospatial indexes with radius queries and streams
+
+in-memory dataset
+can persist it either by dumping the dataset to disk every once in a while, 
+or by appending each command to a log
+
+no official support for Windows builds, but Microsoft develops and maintains a Win-64 port of Redis.
+
+ATOMIC OPERATIONS in concurrent programming are program operations that run completely 
+independently of any other processes!!!
+
+HyperLogLogs: this is a probabilistic data structure?????
+Distributed locks with Redis???? -> REDLOCK???
+
+	RESP protocol description???		
+		For Simple Strings the first byte of the reply is "+"
+		For Errors the first byte of the reply is "-"
+		For Integers the first byte of the reply is ":"
+		For Bulk Strings the first byte of the reply is "$"
+		For Arrays the first byte of the reply is "*"
+
+
+KEYS
+maximum allowed key size is 512 MB
+Dots or dashes are often used for multi-word fields, as in "comment:1234:reply.to" or "comment:1234:reply-to"
+
+STRINGS
+in the case that the key already exists, even if the key is associated with a non-string value!!
+
+	GET -> if key does not exist "nil" -> null
+	SET -> 
+		EX seconds -- Set the specified expire time, in seconds.
+		PX milliseconds -- Set the specified expire time, in milliseconds.
+		NX -- Only set the key if it does not already exist.
+		XX -- Only set the key if it already exist.
+	GETSET -> Atomically sets key to value and returns the old value stored at key
+
+	RETURN VALUES
+		OK
+		NULL
+	
+	INCR -> 
+		Atomic Increment
+		
+	multiple keys
+		MSET -> 
+		MGET -> 
+		
+ALTERATING/QUERYING the key space
+	EXIST
+		0
+		1
+		
+	DEL -> delete
+		0
+		1
+		
+	TYPE -> if key does not exist "none"
+	
+REDIS EXPIRES
+	When the time to live elapses, the key is automatically destroyed
+	seconds/milliseconds precision
+	replicated and persisted on disk
+	
+	EXPIRE key seconds
+	SET key 100 EX 10
+	
+	PERSIST -> can be used in order to remove the expire and make the key persistent forever
+	
+	TTL -> remaining time to live for the key
+	
+LIST
+	implemented via Linked Lists (add new element in constant time.. for a database system it is crucial 
+	to be able to add elements to a very long list in a very fast way)
+	
+	LPUSH (variadic command (push multiple elements in a call)) -> adds a new element into a list, on the left (at the head)
+	RPUSH (variadic command) -> adds a new element into a list ,on the right (at the tail)
+	LRANGE -> takes two indexes (first/last elements of the range)
+		-1 is the last element, -2 is the penultimate element
+	LLEN -> length of the list
+	RPOP
+	LPOP
+	
+CAPPED LIST
+	
+	LTRIM -> sets a range as the new list value. All the elements outside the given range are removed
+	
+BLOCKING OPERATIONS
+	block if the list is empty: return to the caller only when a new element is added to the list, 
+	or when a user-specified timeout is reached
+	0 as timeout to wait for elements forever
+	can also specify multiple lists
+	
+	BRPOP -> 
+	RPOPLPUSH -> (cool stuff... read)
+	RPOPLPUSH -> (cool stuff... read)
+	
+HASHES
+	field-value pairs
+	
+	HMSET -> sets multiple fields
+	HSET -> single field
+	HMGET -> array of values
+	HGET -> value
+	
+	OPERATIONS ON INDIVIDUAL FIELDS
+		HINCRBY
+	
+	It is worth noting that small hashes are encoded in special way in memory that make them very memory efficient.
+	
+PUB/SUB
+	SUBSCRIBE -> channel
+	UNSUBSCRIBE -> channel
+	PUBLISH -> channel message
+	
+		reply
+			type -> (subscribe, unsubscribe, message)
+			channel
+			message
+			
