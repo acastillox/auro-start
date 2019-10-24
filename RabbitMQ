@@ -1,0 +1,85 @@
+publisher -> sender -> send -> will connect to RabbitMQ.. send a single message.. then exit
+consumer -> receiver -> receive -> listenfor messages from RabbitMQ (worker???)
+
+RabbitMQ
+Protocol (wire level protocol) use -> AMQP -> features message orientation, queuing, routing 
+	(point to point and publish/subscribe), reliability and security)
+	
+	CORE IDEA -> PRODUCER NEVER SENDS ANY MESSAGES DIRECTLY TO A QUEUE
+	
+Producing -> sending
+Producer -> program that send messages
+Queue -> Essentially a large message buffer. Message can only be stored inside a queue.
+		 Producers can send messages that go to one queue.
+		 Consumers can try to receive data from one queue
+Consuming -> similar to receiving
+Consumer -> program that mostly waits to receive messages
+
+The connection abstracts the socket connection, and takes care of protocol version negotiation and 
+authentication
+
+/////////////************
+
+Work Queue (a.k.a. Task Queue) -> distribute time-comsuming tasks among multiple workers...
+	schedule the task to be done later. 
+	encapsulate a task as a message and send it to a queue.
+	worker process runnig in the background will pop the tasks and eventually execute the job.
+	many workes -> tasks shared
+	
+	routingKey: "hello" -> messages are routed to the queue specified  <<C>>
+	
+Round-robin -> Rabbit will send each message to the next consumer, in sequence.. on average every
+			   consumer will get the same number of messages
+			   
+Message Acknowledgement -> make sure a message is never lost... an ack(nowledgement) is sent back by
+						   the consumer to tell RabbitMQ that a particular message has been
+						   receive, processed and that RabbitMQ is free to delete it
+						   
+Message Durability -> mark queue as "durable" and messages as "persistent" to make sure that messages are not lost
+					  !!! Rabbit does not allow to redefine an existing queue with different
+						parameters. !!!
+					  
+Fair Dispatch -> (BasicQos - prefetchCount = 1) give no more than one message to a worker at a time.
+				  do not dispatch a new message to a worker until it has processed and acknowledged
+				  the previous one
+				  
+
+/////////////************
+
+Pub/Sub...
+Exchange -> on one side it receives messages from producers and the othe side it pushes them to queues
+	types: direct, topic, headers, fanout
+	
+	exchange: "" -> default/nameless exchange <<C>>
+	QueueDeclare() -> create a non-durable, exclusive, autodelete queue with a generated name <<C>>
+
+Fanout exchange -> broadcast all the messages it receives to all the queues it knows
+
+Bindings -> relationship between exchange and a queue
+			can be read as: the queue is interested in messages from this exchange
+			
+/////////////************
+
+Routing.........
+
+Direct exchange -> a message goes to the queues whose binding key exactly matches the routing key
+				   of the message
+				   
+Multiple bindings -> it is legal to bind multiple queues with the same binding key
+
+Emitting logs -> 
+Subscribing -> create a new binding...
+
+/////////////************
+
+Topic exchange -> message sent with a particular routing key will be delivered to all the queues
+				  that are bound with a matching binding key.... with two special cases:
+					
+					/*/ (star) -> substitute for exactly one word
+					/#/ (hash) -> substitute for zero or more words
+	
+	routing_key -> must be a list of words (limit of 255 bytes), delimited by dots <<C>>
+	
+/////////////************
+
+RPC (remote procedure call) -> 
