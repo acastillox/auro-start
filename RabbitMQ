@@ -1,5 +1,5 @@
 publisher -> sender -> send -> will connect to RabbitMQ.. send a single message.. then exit
-consumer -> receiver -> receive -> listenfor messages from RabbitMQ (worker???)
+consumer -> receiver -> receive -> listen for messages from RabbitMQ (worker???)
 
 RabbitMQ
 Protocol (wire level protocol) use -> AMQP -> features message orientation, queuing, routing 
@@ -14,6 +14,9 @@ Queue -> Essentially a large message buffer. Message can only be stored inside a
 		 Consumers can try to receive data from one queue
 Consuming -> similar to receiving
 Consumer -> program that mostly waits to receive messages
+Channel -> where most of the API for getting things done resides.
+		   lightweight connections that share a single TCP connection
+		   a virtual connection inside a connection
 
 The connection abstracts the socket connection, and takes care of protocol version negotiation and 
 authentication
@@ -54,9 +57,12 @@ Exchange -> on one side it receives messages from producers and the othe side it
 	QueueDeclare() -> create a non-durable, exclusive, autodelete queue with a generated name <<C>>
 
 Fanout exchange -> broadcast all the messages it receives to all the queues it knows
+				   !!(routes messages to all of the queues that are bound to it and the routing key
+					is ignored)!!
 
 Bindings -> relationship between exchange and a queue
 			can be read as: the queue is interested in messages from this exchange
+			!!(RULES THAT EXCHANGES USE (among other things) TO ROUTE MESSAGES TO QUEUES)!!
 			
 /////////////************
 
@@ -64,6 +70,7 @@ Routing.........
 
 Direct exchange -> a message goes to the queues whose binding key exactly matches the routing key
 				   of the message
+				   !!(delivers messages to queues based on the message routing key)!!
 				   
 Multiple bindings -> it is legal to bind multiple queues with the same binding key
 
@@ -74,6 +81,8 @@ Subscribing -> create a new binding...
 
 Topic exchange -> message sent with a particular routing key will be delivered to all the queues
 				  that are bound with a matching binding key.... with two special cases:
+				  !!(ruote messages to one or many queues... matching a message key and the pattern
+				    to bind a queue)!!
 					
 					/*/ (star) -> substitute for exactly one word
 					/#/ (hash) -> substitute for zero or more words
@@ -83,3 +92,33 @@ Topic exchange -> message sent with a particular routing key will be delivered t
 /////////////************
 
 RPC (remote procedure call) -> 
+
+/////////////************
+
+Channel -> Every protocol operation performed by a CLIENT happens on a channel.
+		   Communication on a channel is separate from communicaton on another channel
+		   every protocol method carris a channel ID (a.k.a. channel number)
+		   only exist in the context of a connection
+		   it is common to open a new channel per thread/process and nor share channels
+		   
+/////////////************
+
+Header Exchange -> ???
+
+/////////////************
+
+Consumers -> 
+	push API -> applications have to indicate interest in consuming messages from a partilular queue.
+				(REGISTER a consumer OR SUBSCRIBE to a queue)
+
+PUBLISHER??
+CONSUMER??
+
+/
+
+Exanges Methods:
+
+    exchange.declare (new exchange request from clients)
+    exchange.declare-ok (response from broker)
+    exchange.delete (...request from clients)
+    exchange.delete-ok (...response from broker)
