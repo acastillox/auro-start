@@ -1,0 +1,26 @@
+ssh -R <bind_address>:<port>:<host>:<host_port> -l ubuntu localhost -p <puerto_servidor> -i C:\path-to.pem
+
+[-L] address -> Specifies that the given port on the local (client) host is to be forwarded to the 
+	given host and port on the remote side
+
+[-R] address -> Specifies that the given port on the remote (server) host is to be forwarded to the 
+	given host and port on the local side.
+
+<bind_address> listen on all interfaces
+
+ssh -R *:8080:localhost:80
+ssh -R 0.0.0.0:8080:localhost:80
+
+[-l] login name
+
+ssh -R 0.0.0.0:5100:127.0.0.1:8080 -l ubuntu localhost -p 23403 -i C:\Users\user\Downloads\franky-stack.pem
+ssh -R *:5100:127.0.0.1:8080 -l ubuntu localhost -p 23403 -i C:\Users\user\Downloads\franky-stack.pem
+
+Configuracion
+Por defecto OpenSSH solo permite conectarse a puertos "forwarded" desde el mismo server
+Con la opcion "GatewayPorts" en el archivo "sshd_config" podemos controlar ese compotamiento:
+yes -> permite conexiones de cualquiera. Si el servidor es publico
+no -> evitar conexiones fuera del servidor
+clientspecified -> el cliente puede especificar IPs de las cuales permitir conexiones
+
+systemctl restart sshd
